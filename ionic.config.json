@@ -1,0 +1,7 @@
+{
+  "name": "lego-instructions",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
