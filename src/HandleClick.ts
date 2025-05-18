@@ -1,9 +1,10 @@
 import { FileOpener, FileOpenerOptions } from '@capacitor-community/file-opener';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { isPlatform } from '@ionic/react';
+import { useIonLoading } from '@ionic/react';
 import { appBaseDirectory, appFilesDirectoryName, appBaseDownloadUrl } from './AppConsts';
 
-const handleClick = (e: any) => {
+const handleClick = (e: any, presentLoader: any, dismissLoader: any) => {
   const href = e.currentTarget.getAttribute("href");
   const fileName = href.split("/").pop();
   const filePath = `${appFilesDirectoryName}/${fileName}`;
@@ -35,6 +36,11 @@ const handleClick = (e: any) => {
       if (e.code == '9')
       {
         console.log(`Saving ${fileUrl} to ${filePath}`);
+
+        presentLoader({
+          message: 'Loading ...',
+        });
+
         try
         {
 	  await Filesystem.downloadFile({
@@ -52,6 +58,8 @@ const handleClick = (e: any) => {
         {
           console.log(e);
         }
+
+        dismissLoader();
       }
     }
   }

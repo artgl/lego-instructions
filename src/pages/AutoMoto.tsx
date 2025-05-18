@@ -1,7 +1,12 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import handleClick from '../HandleClick';
+import { useIonLoading } from '@ionic/react';
+import handleClick1 from '../HandleClick';
 
 export default (): React.FC => {
+
+  const [presentLoader, dismissLoader] = useIonLoading();
+  let handleClick = (e) => handleClick1(e, presentLoader, dismissLoader);
+
   return (
     <IonPage>
       <IonHeader>
